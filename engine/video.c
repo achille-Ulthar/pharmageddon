@@ -5,7 +5,7 @@
 #define PL_MPEG_IMPLEMENTATION
 #include "pl_mpeg.h"
 
-void video_open(char *filename, video *v) {
+void video_open(char *filename, video *v, int green) {
     v->plm = plm_create_with_filename(filename);
     if (v->plm == NULL) {
         printf("Could not load video\n");
@@ -14,6 +14,7 @@ void video_open(char *filename, video *v) {
     v->ms_per_frame = 1000.0 / plm_get_framerate(v->plm);
     v->next_frame_time = 0;
     plm_set_audio_enabled(v->plm, 0);
+    v->green = green;
 }
 
 static void video_get_frame(video *v) {
@@ -23,6 +24,11 @@ static void video_get_frame(video *v) {
 static void video_show_frame(video *v, uint32_t *pixels) {
     /* use abgr on the assumption that we're on a little-endian architecture */
     if (v->plm_frame != NULL) plm_frame_to_abgr(v->plm_frame, (uint8_t *)pixels, 192*4);
+    if (v->green) {
+        for (int i = 0; i < 192*192; i++) {
+            pixels[i] = (pixels[i] & 0x00ff00ff);
+        }
+    }
 }
 
 int video_frame(video *v, uint32_t *pixels, uint32_t time) {

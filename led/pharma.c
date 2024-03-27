@@ -46,7 +46,9 @@ int main(int argc, char **argv) {
   fprintf(stderr, "Size: %dx%d. Hardware gpio mapping: %s\n",
           width, height, options.hardware_mapping);
 
-  demo_init(argv[1]);
+  int green = argc > 2 && strncmp(argv[2], "green", 5) == 0;
+
+  demo_init(argv[1], green);
 
   uint32_t audio_start_time = SDL_GetTicks();
 

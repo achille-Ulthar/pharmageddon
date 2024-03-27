@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <SDL2/SDL.h>
 
 #include "demo.h"
@@ -42,7 +43,9 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    demo_init(argv[1]);
+    int green = argc > 2 && strncmp(argv[2], "green", 5) == 0;
+
+    demo_init(argv[1], green);
 
     int running = 1;
     uint32_t audio_start_time = SDL_GetTicks();
