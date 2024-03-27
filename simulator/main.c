@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
 
 #include "demo.h"
 
@@ -15,17 +14,6 @@ int main(int argc, char *argv[])
         printf("Error initializing SDL: %s\n", SDL_GetError());
         return -1;
     }
-
-    int mixer_flags = MIX_INIT_MP3;
-    int mixer_result = Mix_Init(mixer_flags);
-    if (mixer_flags != mixer_result) {
-        printf("Error initialising SDL mixer (result: %d).\n", mixer_result);
-        printf("Mix_Init: %s\n", Mix_GetError());
-        return -1;
-    }
-
-    Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 640);
-    Mix_Music *music = Mix_LoadMUS("../assets/pharmageddon.mp3");
 
     SDL_Window *window = SDL_CreateWindow(
         "Pharmageddon", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -54,10 +42,9 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    demo_init();
+    demo_init(argv[1]);
 
     int running = 1;
-    Mix_PlayMusic(music, 1);
     uint32_t audio_start_time = SDL_GetTicks();
 
     while (running) {
@@ -71,7 +58,9 @@ int main(int argc, char *argv[])
 
         uint32_t time = SDL_GetTicks() - audio_start_time;
 
-        demo_frame(pixels, time);
+        if (demo_frame(pixels, time)) {
+            running = 0;
+        }
 
         /* blank out pixels outside the cross */
         for (int y = 0; y < 64; y++) {
@@ -89,7 +78,6 @@ int main(int argc, char *argv[])
         SDL_RenderPresent(renderer);
     }
 
-    Mix_FreeMusic(music);
     SDL_Quit(); 
     return 0;
 }

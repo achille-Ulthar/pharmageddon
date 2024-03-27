@@ -10,7 +10,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
 
 #include "demo.h"
 
@@ -21,17 +20,6 @@ int main(int argc, char **argv) {
     printf("Error initializing SDL: %s\n", SDL_GetError());
     return -1;
   }
-
-  int mixer_flags = MIX_INIT_MP3;
-  int mixer_result = Mix_Init(mixer_flags);
-  if (mixer_flags != mixer_result) {
-    printf("Error initialising SDL mixer (result: %d).\n", mixer_result);
-    printf("Mix_Init: %s\n", Mix_GetError());
-    return -1;
-  }
-
-  Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 640);
-  Mix_Music *music = Mix_LoadMUS("../assets/pharmageddon.mp3");
 
   struct RGBLedMatrixOptions options;
   struct RGBLedMatrix *matrix;
@@ -58,14 +46,13 @@ int main(int argc, char **argv) {
   fprintf(stderr, "Size: %dx%d. Hardware gpio mapping: %s\n",
           width, height, options.hardware_mapping);
 
-  demo_init();
+  demo_init(argv[1]);
 
-  Mix_PlayMusic(music, 1);
   uint32_t audio_start_time = SDL_GetTicks();
 
   while (1) {
     uint32_t time = (uint32_t)(SDL_GetTicks() - audio_start_time);
-    demo_frame(pixels, time);
+    if (demo_frame(pixels, time)) break;
 
     /* Top panel */
     for (int y = 0; y < 64; y++) {
@@ -106,7 +93,6 @@ int main(int argc, char **argv) {
      */
     offscreen_canvas = led_matrix_swap_on_vsync(matrix, offscreen_canvas);
 
-    if (!Mix_PlayingMusic()) break;
   }
 
   /*

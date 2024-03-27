@@ -8,4 +8,4 @@ typedef struct video {
 } video;
 
 void video_open(char *filename, video *v);
-void video_frame(video *v, uint32_t *pixels, uint32_t time);
+int video_frame(video *v, uint32_t *pixels, uint32_t time);
