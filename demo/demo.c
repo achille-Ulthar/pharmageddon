@@ -65,9 +65,9 @@ void demo_init(void) {
 
 void demo_frame(uint32_t *pixels, uint32_t time) {
     if (time < SCROLLER_END) {
-        scroller_frame(pixels, time);
+        badapple_frame(pixels, time);
     } else if (time < BOARDS_END) {
-        boards_frame(pixels, time);
+        prescription_frame(pixels, time);
     } else if (time < CREDITS_END) {
         credits_frame(pixels, time - BOARDS_END);
     } else if (time < TITLE_END) {

@@ -8,8 +8,8 @@ gfx_image text1;
 gfx_image text2;
 
 void prescription_init(void) {
-    gfx_loadimage("../assets/raccoon_doc.png", &raccoondoctor);
-    gfx_loadimage("../assets/confused_person.png", &confusedperson);
+    gfx_loadimage("../assets/HuldenbergSprite.png", &raccoondoctor);
+    gfx_loadimage("../assets/Sprite-0001.png", &confusedperson);
     gfx_loadimage("../assets/prescriptiontext1.png", &text1);
     gfx_loadimage("../assets/prescriptiontext2.png", &text2);
 }
