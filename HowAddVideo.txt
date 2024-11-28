@@ -1,0 +1,7 @@
+- the videos need to be in the same format as the Zbuffer (static double zbuffer[192*192];)
+- the videos need to be square 1:1 ratio
+- the videos need to be .mpg videos 
+
+in what order to change the videos :
+1: put in 1:1 format and change resolution : https://clideo.com/fr/resize-video 
+2: convert format to .mpg : https://convertio.co/fr/ 
