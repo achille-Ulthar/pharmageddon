@@ -61,7 +61,6 @@ void demo_init(void) {
 #define MEME8_END (MEMES + MEMES_BAR * 8)
 #define PLANES_END 153000
 #define VIDEO_END 168874
-#define MUSIC_END 212000
 
 void demo_frame(uint32_t *pixels, uint32_t time) {
     if (time < SCROLLER_END) {
@@ -112,8 +111,6 @@ void demo_frame(uint32_t *pixels, uint32_t time) {
         planes_frame(pixels, time);
     } else if (time < VIDEO_END) {
         video1_frame(pixels, time);
-    } else if (time < MUSIC_END) {
-        greets_frame(pixels, time - VIDEO_END);
     } else {
         gfx_cls(pixels, 0x00000000);
     }
