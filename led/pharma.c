@@ -1,38 +1,14 @@
-/* -*- mode: c; c-basic-offset: 2; indent-tabs-mode: nil; -*-
- *
- * Using the C-API of this library.
- *
- */
-
 #include "led-matrix-c.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
 
 #include "demo.h"
 
 uint32_t pixels[192 * 192];
 
 int main(int argc, char **argv) {
-  if (SDL_Init(SDL_INIT_AUDIO) != 0) {
-    printf("Error initializing SDL: %s\n", SDL_GetError());
-    return -1;
-  }
-
-  int mixer_flags = MIX_INIT_MP3;
-  int mixer_result = Mix_Init(mixer_flags);
-  if (mixer_flags != mixer_result) {
-    printf("Error initialising SDL mixer (result: %d).\n", mixer_result);
-    printf("Mix_Init: %s\n", Mix_GetError());
-    return -1;
-  }
-
-  Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 640);
-  Mix_Music *music = Mix_LoadMUS("../assets/pharmageddon.mp3");
-
   struct RGBLedMatrixOptions options;
   struct RGBLedMatrix *matrix;
   struct LedCanvas *offscreen_canvas;
@@ -49,7 +25,7 @@ int main(int argc, char **argv) {
 
   /* Let's do an example with double-buffering. We create one extra
    * buffer onto which we draw, which is then swapped on each refresh.
-   * This is typically a good aproach for animations and such.
+   * This is typically a good approach for animations and such.
    */
   offscreen_canvas = led_matrix_create_offscreen_canvas(matrix);
 
@@ -60,11 +36,8 @@ int main(int argc, char **argv) {
 
   demo_init();
 
-  Mix_PlayMusic(music, 1);
-  uint32_t audio_start_time = SDL_GetTicks();
-
   while (1) {
-    uint32_t time = (uint32_t)(SDL_GetTicks() - audio_start_time);
+    uint32_t time = (uint32_t)(SDL_GetTicks());
     demo_frame(pixels, time);
 
     /* Top panel */
@@ -105,8 +78,6 @@ int main(int argc, char **argv) {
      * iteration.
      */
     offscreen_canvas = led_matrix_swap_on_vsync(matrix, offscreen_canvas);
-
-    if (!Mix_PlayingMusic()) break;
   }
 
   /*
