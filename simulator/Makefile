@@ -19,7 +19,7 @@ SRCS := main.c
 OBJS := $(SRCS:.c=.o) $(DEMO_DIR)/demo.a $(ENGINE_DIR)/engine.a
 
 # name of executable
-EXEC := pharma
+EXEC := demo
 
 # default recipe
 all: $(EXEC)

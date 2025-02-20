@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "gfx3d.h": "c"
+        "gfx3d.h": "c",
+        "techno01.h": "c"
     }
 }
