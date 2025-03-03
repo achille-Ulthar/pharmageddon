@@ -34,11 +34,11 @@ int main(int argc, char **argv) {
   fprintf(stderr, "Size: %dx%d. Hardware gpio mapping: %s\n",
           width, height, options.hardware_mapping);
 
-  demo_init();
+  trippy_init();
 
   while (1) {
     uint32_t time = (uint32_t)(SDL_GetTicks());
-    demo_frame(pixels, time);
+    trippy_frame(pixels, time);
 
     /* Top panel */
     for (int y = 0; y < 64; y++) {
