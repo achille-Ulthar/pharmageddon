@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "demo.h"
+#include "trippy.h"
 
 uint32_t pixels[192 * 192];
 
