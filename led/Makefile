@@ -13,7 +13,7 @@ ENGINE_DIR = ../engine
 
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter `sdl2-config --cflags`
 CXXFLAGS=$(CFLAGS)
-OBJECTS=pharma.o $(DEMO_DIR)/Trippy.a $(ENGINE_DIR)/engine.a
+OBJECTS=pharma.o $(DEMO_DIR)/trippy.a $(ENGINE_DIR)/engine.a
 BINARIES=pharma
 
 all : $(BINARIES)
@@ -30,7 +30,7 @@ $(RGB_LIBRARY): FORCE
 pharma : $(OBJECTS) $(RGB_LIBRARY)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) -lstdc++
 
-$(DEMO_DIR)/Trippy.a: FORCE
+$(DEMO_DIR)/trippy.a: FORCE
 	$(MAKE) -C $(DEMO_DIR)
 
 $(ENGINE_DIR)/engine.a: FORCE
