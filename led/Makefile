@@ -8,12 +8,12 @@ RGB_LIBRARY_NAME=rgbmatrix
 RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
 LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread `sdl2-config --libs` -lSDL2_mixer -lassimp
 
-DEMO_DIR = ../demo
+DEMO_DIR = ../Trippy
 ENGINE_DIR = ../engine
 
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter `sdl2-config --cflags`
 CXXFLAGS=$(CFLAGS)
-OBJECTS=pharma.o $(DEMO_DIR)/demo.a $(ENGINE_DIR)/engine.a
+OBJECTS=pharma.o $(DEMO_DIR)/Trippy.a $(ENGINE_DIR)/engine.a
 BINARIES=pharma
 
 all : $(BINARIES)
@@ -30,7 +30,7 @@ $(RGB_LIBRARY): FORCE
 pharma : $(OBJECTS) $(RGB_LIBRARY)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) -lstdc++
 
-$(DEMO_DIR)/demo.a: FORCE
+$(DEMO_DIR)/Trippy.a: FORCE
 	$(MAKE) -C $(DEMO_DIR)
 
 $(ENGINE_DIR)/engine.a: FORCE
