@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
-#include "demo.h"
+#include "medicprocess.h"
 
 #define SCALE 3
 #define WIDTH 192
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    demo_init();
+    medicprocess_init();
 
     int running = 1;
     uint32_t start_time = SDL_GetTicks();
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 
         uint32_t time = SDL_GetTicks() - start_time;
 
-        demo_frame(pixels, time);
+        medicprocess_frame(pixels, time);
 
         /* blank out pixels outside the cross */
         for (int y = 0; y < 64; y++) {

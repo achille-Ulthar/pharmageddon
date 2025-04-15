@@ -3,29 +3,29 @@
 # set the compiler
 CC := clang
 
-DEMO_DIR = ../demo
+medicprocess_DIR = ../medicprocess
 ENGINE_DIR = ../engine
 
-CFLAGS := `sdl2-config --cflags` -ggdb3 -O0 --std=c99 -Wall -I $(DEMO_DIR) -I $(ENGINE_DIR)
+CFLAGS := `sdl2-config --cflags` -ggdb3 -O0 --std=c99 -Wall -I $(medicprocess_DIR) -I $(ENGINE_DIR)
 LDFLAGS := `sdl2-config --libs` -lSDL2_mixer -lm -lassimp
 
 # add header files here
-HDRS := $(DEMO_DIR)/demo.h
+HDRS := $(medicprocess_DIR)/medicprocess.h
 
 # add source files here
 SRCS := main.c
 
 # generate names of object files
-OBJS := $(SRCS:.c=.o) $(DEMO_DIR)/demo.a $(ENGINE_DIR)/engine.a
+OBJS := $(SRCS:.c=.o) $(medicprocess_DIR)/medicprocess.a $(ENGINE_DIR)/engine.a
 
 # name of executable
-EXEC := demo
+EXEC := medicprocess
 
 # default recipe
 all: $(EXEC)
 
-$(DEMO_DIR)/demo.a: FORCE
-	$(MAKE) -C $(DEMO_DIR)
+$(medicprocess_DIR)/medicprocess.a: FORCE
+	$(MAKE) -C $(medicprocess_DIR)
 
 $(ENGINE_DIR)/engine.a: FORCE
 	$(MAKE) -C $(ENGINE_DIR)
