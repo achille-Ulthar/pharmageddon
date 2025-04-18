@@ -27,7 +27,7 @@ $(RGB_LIBRARY): FORCE
 
 # Since the C example uses the C++ library underneath, which depends on C++
 # runtime stuff, you still have to also link -lstdc++
-pharma : $(OBJECTS) $(RGB_LIBRARY)
+memes : $(OBJECTS) $(RGB_LIBRARY)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) -lstdc++
 
 $(DEMO_DIR)/memes.a: FORCE
