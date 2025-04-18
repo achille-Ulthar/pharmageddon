@@ -8,13 +8,13 @@ RGB_LIBRARY_NAME=rgbmatrix
 RGB_LIBRARY=$(RGB_LIBDIR)/lib$(RGB_LIBRARY_NAME).a
 LDFLAGS+=-L$(RGB_LIBDIR) -l$(RGB_LIBRARY_NAME) -lrt -lm -lpthread `sdl2-config --libs` -lSDL2_mixer -lassimp
 
-DEMO_DIR = ../medicprocess
+DEMO_DIR = ../memes
 ENGINE_DIR = ../engine
 
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter `sdl2-config --cflags`
 CXXFLAGS=$(CFLAGS)
-OBJECTS=pharma.o $(DEMO_DIR)/medicprocess.a $(ENGINE_DIR)/engine.a
-BINARIES=medicprocess
+OBJECTS=pharma.o $(DEMO_DIR)/memes.a $(ENGINE_DIR)/engine.a
+BINARIES=memes
 
 all : $(BINARIES)
 
@@ -27,10 +27,10 @@ $(RGB_LIBRARY): FORCE
 
 # Since the C example uses the C++ library underneath, which depends on C++
 # runtime stuff, you still have to also link -lstdc++
-medicprocess : $(OBJECTS) $(RGB_LIBRARY)
+memes : $(OBJECTS) $(RGB_LIBRARY)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) -lstdc++
 
-$(DEMO_DIR)/medicprocess.a: FORCE
+$(DEMO_DIR)/memes.a: FORCE
 	$(MAKE) -C $(DEMO_DIR)
 
 $(ENGINE_DIR)/engine.a: FORCE
