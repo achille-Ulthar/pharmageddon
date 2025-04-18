@@ -4,6 +4,7 @@
         "techno01.h": "c",
         "cow.h": "c",
         "hazmat.h": "c",
-        "kabouter.h": "c"
+        "kabouter.h": "c",
+        "medicprocess.h": "c"
     }
 }
