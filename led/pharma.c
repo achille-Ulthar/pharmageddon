@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "memes.h"
+#include "medicprocess.h"
 
 uint32_t pixels[192 * 192];
 
@@ -34,10 +34,11 @@ int main(int argc, char **argv) {
   fprintf(stderr, "Size: %dx%d. Hardware gpio mapping: %s\n",
           width, height, options.hardware_mapping);
 
-  memes_init();
+  medicprocess_init();
 
+  while (1) {
     uint32_t time = (uint32_t)(SDL_GetTicks());
-    memes_frame(pixels, time);
+    medicprocess_frame(pixels, time);
 
     /* Top panel */
     for (int y = 0; y < 64; y++) {
@@ -77,7 +78,7 @@ int main(int argc, char **argv) {
      * iteration.
      */
     offscreen_canvas = led_matrix_swap_on_vsync(matrix, offscreen_canvas);
-  
+  }
 
   /*
    * Make sure to always call led_matrix_delete() in the end to reset the
