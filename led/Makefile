@@ -14,7 +14,7 @@ ENGINE_DIR = ../engine
 CFLAGS=-Wall -O3 -g -Wextra -Wno-unused-parameter `sdl2-config --cflags`
 CXXFLAGS=$(CFLAGS)
 OBJECTS=pharma.o $(DEMO_DIR)/memes.a $(ENGINE_DIR)/engine.a
-BINARIES=pharma
+BINARIES=memes
 
 all : $(BINARIES)
 
